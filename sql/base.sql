@@ -42,6 +42,14 @@ CREATE TABLE EMPRUNTS_emprunt (
     FOREIGN KEY (id_membre) REFERENCES EMPRUNTS_membres(id_membre)
 ); 
 
+
+CREATE TABLE EMPRUNTS_images_objet (
+    id_image INT AUTO_INCREMENT PRIMARY KEY,
+    id_objet INT,
+    nom_image VARCHAR(255),
+    FOREIGN KEY (id_objet) REFERENCES EMPRUNTS_objet(id_objet)
+);
+
 INSERT INTO EMPRUNTS_membres (nom, date_de_naissance, genre, email, ville, mdp, image_profil) VALUES
 ('Joshua RASAMOELY', '2006-06-18', 'H', 'joshuarasamoely@gmail.com', 'Antananarivo', 'mdp1', 'joshua.jpg'),
 ('Mihaja RANDRIANASOLO', '2006-07-16', 'H', 'mihajatianarivo@gmail.com', 'Antananarivo', 'mdp2', 'mihaja.jpg'),

@@ -69,22 +69,29 @@ if ($res_cat) {
                 </table>
             </div>
         </div>
-        <form action="traitement_ajouter_nouvel_objet.php" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="nom_objet" class="form-label">Nom de l'objet</label>
-                <input type="text" class="form-control" id="nom_objet" name="nom_objet" required>
-            </div>
-            <div class="mb-3">
-                <label for="categorie" class="form-label">Catégorie</label>
-                <select name="categorie" id="categorie" class="form-select">
-                    <?php for ($i = 0; $i < count($categories); $i++) { ?>
-                        <option value="<?php echo $categories[$i]['id_categorie']; ?>"><?php echo $categories[$i]['nom_categorie']; ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="categorie" class="form-label">Catégorie</label>
-        </form>
+        <form action="../page_traitements/traitement_ajouter_nouvel_objet.php" method="post" enctype="multipart/form-data" class="mt-5 mb-4 p-4 bg-white rounded shadow-sm" style="max-width: 600px; margin: 0 auto;">
+    <h4 class="mb-3 text-center">Ajouter un nouvel objet</h4>
+    <div class="mb-3">
+        <label for="nom_objet" class="form-label">Nom de l'objet</label>
+        <input type="text" class="form-control" id="nom_objet" name="nom_objet" required>
+    </div>
+    <div class="mb-3">
+        <label for="categorie_objet" class="form-label">Categorie</label>
+        <select name="categorie_objet" id="categorie_objet" class="form-select" required>
+            <?php foreach ($categories as $cat) { ?>
+                <option value="<?php echo $cat['id_categorie']; ?>"><?php $cat['nom_categorie']; ?></option>
+            <?php } ?>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="images_objet" class="form-label">Images de l'objet</label>
+        <input type="file" class="form-control" id="images_objet" name="images_objet[]" accept="image/*" multiple required>
+        <small class="form-text text-muted">Vous pouvez sélectionner plusieurs images.</small>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary px-4">Ajouter l'objet</button>
+    </div>
+</form>
     </div>
 </div>
 <?php include '../../inc/footer.php'; ?>
