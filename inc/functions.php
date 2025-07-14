@@ -70,9 +70,6 @@ function inscrire_membres($bdd, $nom, $dtn ,$genre, $email, $ville, $mdp) {
 // }
 
 function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
-    echo '<table border="1" cellpadding="6" cellspacing="0">';
-    echo '<tr><th>Nom de la personne</th><th>Catégorie</th><th>Objet</th><th>Date d\'emprunt</th><th>Fin/Statut</th></tr>';
-
     $sql = "
         SELECT m.nom AS nom_personne, c.nom_categorie, o.nom_objet, e.date_emprunt, e.date_retour
         FROM EMPRUNTS_emprunt e
@@ -88,11 +85,7 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
     $aujourdhui = date('Y-m-d');
     if ($res && mysqli_num_rows($res) > 0) {
         while ($row = mysqli_fetch_assoc($res)) {
-            if ($row['date_retour'] >= $aujourdhui) {
-                $statut = $row['date_retour'];
-            } else {
-                $statut = 'expiré';
-            }
+            $statut = ($row['date_retour'] >= $aujourdhui) ? $row['date_retour'] : 'expiré';
             echo '<tr>';
             echo '<td>' . $row['nom_personne'] . '</td>';
             echo '<td>' . $row['nom_categorie'] . '</td>';
@@ -104,5 +97,4 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
     } else {
         echo '<tr><td colspan="5">Aucun emprunt trouvé.</td></tr>';
     }
-    echo '</table>';
 } 
