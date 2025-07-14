@@ -1,0 +1,22 @@
+Creer la base de donnes dans le mysql bin
+
+Creer les tables necessaires dans sql/base.sql:
+membre (id_membre, nom , date de naissance, genre, émail, ville, mdp, image_profil)
+categorie_objet (id_categorie, nom_categorie )
+objet (id_objet , nom_objet , id_categorie, id_membre)
+images_objet(id_image, id_objet, nom_image)
+emprunt(id_emprunt, id_objet, id_membre, date_emprunt, date_retour)
+
+inserer des donnes exemplaires:
+4  membres
+4 catégories ( esthétique, bricolage, mécanique , cuisine )
+10 objets par membre à répartir sur les catégories
+10 emprunts
+
+
+
+Creation des pages demandees:
+- Login.php et fonction identification via email et mot de passe
+-Inscription.php pour s'inscire enail, nom. ville
+- home.php pour afficher les differentes categories
+

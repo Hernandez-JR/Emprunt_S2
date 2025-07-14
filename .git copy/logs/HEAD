@@ -1,0 +1,6 @@
+0000000000000000000000000000000000000000 2dcb5927aeceb7aef904c75a17afc862ee5598e7 HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752471068 +0300	clone: from https://github.com/Hernandez-JR/Projet-final-s2.git
+2dcb5927aeceb7aef904c75a17afc862ee5598e7 ebd17bb58a483799f2e892adaaa57aad2e6c09d4 HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752471317 +0300	commit: factorisation
+ebd17bb58a483799f2e892adaaa57aad2e6c09d4 70a9d0e85094e6c542385eaedcc2d5ab96cadab4 HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752471591 +0300	commit: add database connexion
+70a9d0e85094e6c542385eaedcc2d5ab96cadab4 d3c8a3cff2cca558523f56fb37bab18c9fc4f223 HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752473198 +0300	commit: add connectDB
+d3c8a3cff2cca558523f56fb37bab18c9fc4f223 136dd04512f2930b05df516393ce06dab4a2598f HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752473662 +0300	commit: rect add database
+136dd04512f2930b05df516393ce06dab4a2598f d8650498ff3173fa4480aa28d040dfddc342894d HERNANDEZ-JR <rasamoelyhernandez@gmail.com> 1752477035 +0300	commit: add fonction, inscritption, database
