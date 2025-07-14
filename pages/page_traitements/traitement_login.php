@@ -11,11 +11,12 @@
         $motdepasse = $_POST['mdp'];
         
         if(authentifier_membres($bdd, $email, $motdepasse)) {
-            redirect('../page_sites/home.php');
+            header("Location: ../page_sites/home.php");
         } else {
-            redirect('../page_sites/connexion.php?erreur=1');
+            header("Location: ../page_sites/connexion.php?erreur=1");
+
         }
     } else {
-        redirect('../page/connexion.php?erreur=1');
+        header('Location: ../page_sites/connexion.php?erreur=1');
     }
 ?>  

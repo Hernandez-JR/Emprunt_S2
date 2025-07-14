@@ -14,7 +14,7 @@
     <nav></nav>
     <h1>Page de connexion</h1>
 
-    <form action="traitement_login.php" method=post>
+    <form action="../page_traitements/traitement_login.php" method=post>
         <label for="email">Email :</label>
         <input type="email" id="email" name="email" required><br><br>
 

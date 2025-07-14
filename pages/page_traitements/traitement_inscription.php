@@ -11,18 +11,18 @@
     
     ) {
         $nom = $_POST['nom'];
-        $email = $_POST['email'];
         $date_naissance-= $_POST['date_de_naissance'];
-        $genre = $_POST['genre'];      
+        $genre = $_POST['genre']; 
+        $email = $_POST['email'];
+        $ville = $_POST['ville'];   
         $motdepasse = $_POST['mdp'];
-        $
-        
-        if(authentifier_membres($bdd, $email, $motdepasse)) {
-            redirect('../page_sites/home.php');
+
+        if(inscrire_membres($bdd, $nom, $date_naissance ,$genre, $email, $ville, $motdepasse)) {
+            header('Location: ../page_sites/home.php');
         } else {
-            redirect('../page_sites/connexion.php?erreur=1');
+            header('Location: ../page_sites/inscription.php?erreur=1');
         }
     } else {
-        redirect('../page/connexion.php?erreur=1');
+        header('Location: ../page_sites/inscription.php?erreur=1');
     }
 ?>  

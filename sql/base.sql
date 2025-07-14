@@ -19,15 +19,15 @@ CREATE TABLE EMPRUNTS_objet (
     nom_objet VARCHAR(100),
     id_categorie INT,
     id_membre INT,
-    FOREIGN KEY (id_categorie) REFERENCES categorie_objet(id_categorie),
-    FOREIGN KEY (id_membre) REFERENCES membres(id_membre)
+    FOREIGN KEY (id_categorie) REFERENCES EMPRUNTS_categorie_objet(id_categorie),
+    FOREIGN KEY (id_membre) REFERENCES EMPRUNTS_membres(id_membre)
 );
 
 CREATE TABLE EMPRUNTS_images_objet (
     id_image INT AUTO_INCREMENT PRIMARY KEY,
     id_objet INT,
     nom_image VARCHAR(255),
-    FOREIGN KEY (id_objet) REFERENCES objet(id_objet)
+    FOREIGN KEY (id_objet) REFERENCES EMPRUNTS_objet(id_objet)
 );
 
 CREATE TABLE EMPRUNTS_emprunt (
@@ -36,16 +36,17 @@ CREATE TABLE EMPRUNTS_emprunt (
     id_membre INT,
     date_emprunt DATE,
     date_retour DATE,
-    FOREIGN KEY (id_objet) REFERENCES objet(id_objet),
-    FOREIGN KEY (id_membre) REFERENCES membres(id_membre)
+    FOREIGN KEY (id_objet) REFERENCES EMPRUNTS_objet(id_objet),
+    FOREIGN KEY (id_membre) REFERENCES EMPRUNTS_membres(id_membre)
 ); 
 
 INSERT INTO EMPRUNTS_membres (nom, date_de_naissance, genre, email, ville, mdp, image_profil) VALUES
-('Joshua RASAMOELY', '2006-18-06', 'H', 'joshuarasamoely@gmail.com', 'Antananarivo', 'mdp1', 'joshua.jpg'),
-('Mihaja RANDRIANASOLO', '2006-16-07', 'M', 'mihajatianarivo@gmail.com', 'Antananarivo', 'mdp2', 'mihaja.jpg'),
-('Soraya RAJAONARY', '2004-07-11', 'F', 'sorayara@gmail.com', 'Paris', 'mdp3', 'soraya.jpg'),
-('Aymeric RAKOTO', '2006-18-07', 'M', 'aymericrakoto@gmail.com', 'Paris', 'mdp4', 'aymeric.jpg');
+('Joshua RASAMOELY', '2006-06-18', 'H', 'joshuarasamoely@gmail.com', 'Antananarivo', 'mdp1', 'joshua.jpg'),
+('Mihaja RANDRIANASOLO', '2006-07-16', 'H', 'mihajatianarivo@gmail.com', 'Antananarivo', 'mdp2', 'mihaja.jpg'),
+('Soraya RAJAONARY', '2004-11-07', 'F', 'sorayara@gmail.com', 'Paris', 'mdp3', 'soraya.jpg'),
+('Aymeric RAKOTO', '2006-07-25', 'H', 'aymericrakoto@gmail.com', 'Paris', 'mdp4', 'aymeric.jpg');
 
+update EMPRUNTS_membres set genre = 'H' where id_membre = 4;
 
 INSERT INTO EMPRUNTS_categorie_objet (nom_categorie) VALUES
 ('esthétique'),

@@ -14,7 +14,7 @@
     <nav></nav>
     <h1>Page d'inscription</h1>
 
-    <form action="traitement_inscription.php" method="post" enctype="multipart/form-data">
+    <form action="../page_traitements/traitement_inscription.php" method="post" enctype="multipart/form-data">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required><br><br>
 
@@ -23,10 +23,8 @@
 
         <label for="genre">Genre :</label>
         <select id="genre" name="genre" required>
-            <option value="">--Sélectionnez--</option>
-            <option value="H">Homme</option>
-            <option value="F">Femme</option>
-            <option value="M">Masculin</option>
+            <option value="H">H</option>
+            <option value="F">F</option>
         </select><br><br>
 
         <label for="email">Email :</label>

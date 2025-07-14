@@ -17,7 +17,7 @@ function connectDB() {
     $host = 'localhost';
     $user = 'root';
     $password = '';
-    $database = '';
+    $database = 'emprunts';
 
     $bdd = mysqli_connect($host, $user, $password, $database);
 
