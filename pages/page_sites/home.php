@@ -42,15 +42,11 @@ if ($res_cat) {
                 <div class="col-auto">
                     <select name="categorie" id="categorie" class="form-select">
                         <option value="">Toutes</option>
-                        <?php
-                        for ($i = 0; $i < count($categories); $i++) {
-                            echo '<option value="' . $categories[$i]['id_categorie'] . '"';
-                            if ($id_categorie == $categories[$i]['id_categorie']) {
-                                echo ' selected';
-                            }
-                            echo '>' . $categories[$i]['nom_categorie'] . '</option>';
-                        }
-                        ?>
+                        <?php for ($i = 0; $i < count($categories); $i++) { ?>
+                            <option value="<?php echo $categories[$i]['id_categorie']; ?>"<?php if ($id_categorie == $categories[$i]['id_categorie']) { ?> selected<?php } ?>>
+                                <?php echo $categories[$i]['nom_categorie']; ?>
+                            </option>
+                        <?php } ?>
                     </select>
                 </div>
                 <div class="col-auto">
@@ -61,11 +57,10 @@ if ($res_cat) {
                 <table class="table table-bordered table-hover table-striped align-middle">
                     <thead>
                         <tr>
-                            <th>Nom de la personne</th>
-                            <th>Catégorie</th>
                             <th>Objet</th>
+                            <th>Catégorie</th>
                             <th>Date d'emprunt</th>
-                            <th>Fin/Statut</th>
+                            <th>Date de retour</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -74,6 +69,22 @@ if ($res_cat) {
                 </table>
             </div>
         </div>
+        <form action="traitement_ajouter_nouvel_objet.php" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="nom_objet" class="form-label">Nom de l'objet</label>
+                <input type="text" class="form-control" id="nom_objet" name="nom_objet" required>
+            </div>
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Catégorie</label>
+                <select name="categorie" id="categorie" class="form-select">
+                    <?php for ($i = 0; $i < count($categories); $i++) { ?>
+                        <option value="<?php echo $categories[$i]['id_categorie']; ?>"><?php echo $categories[$i]['nom_categorie']; ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="categorie" class="form-label">Catégorie</label>
+        </form>
     </div>
 </div>
 <?php include '../../inc/footer.php'; ?>

@@ -71,30 +71,28 @@ function inscrire_membres($bdd, $nom, $dtn ,$genre, $email, $ville, $mdp) {
 
 function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
     $sql = "
-        SELECT m.nom AS nom_personne, c.nom_categorie, o.nom_objet, e.date_emprunt, e.date_retour
-        FROM EMPRUNTS_emprunt e
-        JOIN EMPRUNTS_objet o ON e.id_objet = o.id_objet
+        SELECT o.nom_objet, c.nom_categorie, e.date_emprunt, e.date_retour
+        FROM EMPRUNTS_objet o
         JOIN EMPRUNTS_categorie_objet c ON o.id_categorie = c.id_categorie
-        JOIN EMPRUNTS_membres m ON e.id_membre = m.id_membre
+        LEFT JOIN EMPRUNTS_emprunt e ON o.id_objet = e.id_objet
     ";
     if ($id_categorie) {
         $sql .= " WHERE o.id_categorie = '" . $id_categorie . "'";
     }
-    $sql .= " ORDER BY e.date_emprunt DESC";
+    $sql .= " ORDER BY o.nom_objet ASC";
     $res = mysqli_query($bdd, $sql);
-    $aujourdhui = date('Y-m-d');
     if ($res && mysqli_num_rows($res) > 0) {
         while ($row = mysqli_fetch_assoc($res)) {
-            $statut = ($row['date_retour'] >= $aujourdhui) ? $row['date_retour'] : 'expiré';
+            $date_emprunt = $row['date_emprunt'] ? $row['date_emprunt'] : '-';
+            $date_retour = $row['date_retour'] ? $row['date_retour'] : 'disponible';
             echo '<tr>';
-            echo '<td>' . $row['nom_personne'] . '</td>';
-            echo '<td>' . $row['nom_categorie'] . '</td>';
             echo '<td>' . $row['nom_objet'] . '</td>';
-            echo '<td>' . $row['date_emprunt'] . '</td>';
-            echo '<td>' . $statut . '</td>';
+            echo '<td>' . $row['nom_categorie'] . '</td>';
+            echo '<td>' . $date_emprunt . '</td>';
+            echo '<td>' . $date_retour . '</td>';
             echo '</tr>';
         }
     } else {
-        echo '<tr><td colspan="5">Aucun emprunt trouvé.</td></tr>';
+        echo '<tr><td colspan="4">Aucun objet trouvé.</td></tr>';
     }
 } 
