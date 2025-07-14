@@ -50,6 +50,7 @@ CREATE TABLE EMPRUNTS_images_objet (
     FOREIGN KEY (id_objet) REFERENCES EMPRUNTS_objet(id_objet)
 );
 
+
 INSERT INTO EMPRUNTS_membres (nom, date_de_naissance, genre, email, ville, mdp, image_profil) VALUES
 ('Joshua RASAMOELY', '2006-06-18', 'H', 'joshuarasamoely@gmail.com', 'Antananarivo', 'mdp1', 'joshua.jpg'),
 ('Mihaja RANDRIANASOLO', '2006-07-16', 'H', 'mihajatianarivo@gmail.com', 'Antananarivo', 'mdp2', 'mihaja.jpg'),
@@ -112,11 +113,11 @@ INSERT INTO EMPRUNTS_objet (nom_objet, id_categorie, id_membre) VALUES
 
 
 INSERT INTO EMPRUNTS_images_objet (id_objet, nom_image) VALUES
-(1, 'assets/images/img_objet/seche_cheveux.jpg'),
-(2, 'assets/images/img_objet/lisseur.jpg'),
-(11, 'assets/images/img_objet/ponceuse.jpg'),
-(21, 'assets/images/img_objet/trousse_manucure.jpg'),
-(31, 'assets/images/img_objet/brosse_lissante.jpg');
+(1, 'assets/images/img_objet/seche_cheveux.webp'),
+(2, 'assets/images/img_objet/Lisseur.webp'),
+(11, 'assets/images/img_objet/ponceuse.webp'),
+(21, 'assets/images/img_objet/trousse_manucure.webp'),
+(31, 'assets/images/img_objet/brosse_lissante.webp');
 
 
 INSERT INTO EMPRUNTS_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES
