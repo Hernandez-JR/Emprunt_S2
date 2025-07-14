@@ -1,3 +1,5 @@
+use db_s2_ETU004027;
+
 CREATE TABLE EMPRUNTS_membres (
     id_membre INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),

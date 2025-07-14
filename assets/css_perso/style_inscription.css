@@ -1,22 +1,61 @@
 body {
-  background: #c4b397; /* beige très clair */
+    background: #e3f0ff;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.card {
-  background: #fffbe9; /* blanc/beige doux */
+.inscription-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-custom {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(30, 64, 175, 0.08);
+    padding: 32px 24px 24px 24px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.titre-form {
+    color: #1e40af; /* bleu foncé */
+    text-align: center;
+    margin-bottom: 24px;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.form-label {
+    color: #1e40af;
+    font-weight: 500;
 }
 
 .btn-primary {
-  background-color: #e6cfa7;
-  border-color: #e6cfa7;
-  color: #5a4632;
+    background-color: #2563eb;
+    border-color: #2563eb;
+    color: #fff;
 }
 
 .btn-primary:hover {
-  background-color: #d9b98c;
-  border-color: #d9b98c;
-  color: #5a4632;
+    background-color: #1e40af;
+    border-color: #1e40af;
+    color: #fff;
 }
-.container.mt-5 {
-    margin-top: 60px; 
+
+.btn-outline-primary {
+    color: #2563eb;
+    border-color: #2563eb;
+    background: #fff;
 }
+
+.btn-outline-primary:hover {
+    background: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+}
+
+
