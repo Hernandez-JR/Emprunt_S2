@@ -54,7 +54,7 @@ if ($res_cat) {
                     </select>
                 </div>
                 <div class="col-auto">
-                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                    <button type="submit" class="btn btn-warning">Filtrer</button>
                 </div>
             </form>
             <div class="table-responsive">
