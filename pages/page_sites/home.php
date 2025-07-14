@@ -57,6 +57,7 @@ if ($res_cat) {
                 <table class="table table-bordered table-hover table-striped align-middle">
                     <thead>
                         <tr>
+                            <th>Image</th>
                             <th>Objet</th>
                             <th>Catégorie</th>
                             <th>Date d'emprunt</th>

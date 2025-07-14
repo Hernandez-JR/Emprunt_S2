@@ -1,0 +1,12 @@
+.fiche-objet-box {
+    max-width: 700px;
+    margin: 0 auto;
+}
+.img-fiche-objet {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(30,64,175,0.10);
+    border: 2px solid #e3e3e3;
+}

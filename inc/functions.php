@@ -71,7 +71,7 @@ function inscrire_membres($bdd, $nom, $dtn ,$genre, $email, $ville, $mdp) {
 
 function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
     $sql = "
-        SELECT o.nom_objet, c.nom_categorie, e.date_emprunt, e.date_retour
+        SELECT o.id_objet, o.nom_objet, c.nom_categorie, e.date_emprunt, e.date_retour
         FROM EMPRUNTS_objet o
         JOIN EMPRUNTS_categorie_objet c ON o.id_categorie = c.id_categorie
         LEFT JOIN EMPRUNTS_emprunt e ON o.id_objet = e.id_objet
@@ -83,17 +83,27 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
     $res = mysqli_query($bdd, $sql);
     if ($res && mysqli_num_rows($res) > 0) {
         while ($row = mysqli_fetch_assoc($res)) {
+            $id_objet = $row['id_objet'];
+            $img_sql = "SELECT nom_image FROM EMPRUNTS_images_objet WHERE id_objet = $id_objet LIMIT 1";
+            $img_res = mysqli_query($bdd, $img_sql);
+            if ($img_res && mysqli_num_rows($img_res) > 0) {
+                $img_row = mysqli_fetch_assoc($img_res);
+                $img_src = '../../' . $img_row['nom_image'];
+            } else {
+                $img_src = '../../assets/images/img_objet/tournevis.webp';
+            }
             $date_emprunt = $row['date_emprunt'] ? $row['date_emprunt'] : '-';
             $date_retour = $row['date_retour'] ? $row['date_retour'] : 'disponible';
             echo '<tr>';
-            echo '<td>' . $row['nom_objet'] . '</td>';
+            echo '<td><img src="' . $img_src . '" alt="image objet" style="width:60px;height:60px;object-fit:cover;border-radius:8px;"></td>';
+            echo '<td><a href="fiche_objet.php?id=' . $row['id_objet'] . '" style="color:#2563eb;text-decoration:underline;">' . $row['nom_objet'] . '</a></td>';
             echo '<td>' . $row['nom_categorie'] . '</td>';
             echo '<td>' . $date_emprunt . '</td>';
             echo '<td>' . $date_retour . '</td>';
             echo '</tr>';
         }
     } else {
-        echo '<tr><td colspan="4">Aucun objet trouvé.</td></tr>';
+        echo '<tr><td colspan="5">Aucun objet trouvé.</td></tr>';
     }
 } 
 
@@ -109,4 +119,38 @@ function ajouter_objet($bdd, $nom_objet, $id_categorie, $id_membre) {
 function ajouter_image_objet($bdd, $id_objet, $nom_image) {
     $sql = "INSERT INTO EMPRUNTS_images_objet (id_objet, nom_image) VALUES ($id_objet, '$nom_image')";
     return mysqli_query($bdd, $sql);
+} 
+
+function get_objet_by_id($bdd, $id_objet) {
+    $sql = "SELECT o.nom_objet, c.nom_categorie FROM EMPRUNTS_objet o JOIN EMPRUNTS_categorie_objet c ON o.id_categorie = c.id_categorie WHERE o.id_objet = $id_objet";
+    $res = mysqli_query($bdd, $sql);
+    if ($res && mysqli_num_rows($res) > 0) {
+        return mysqli_fetch_assoc($res);
+    } else {
+        return false;
+    }
+}
+
+function get_images_objet($bdd, $id_objet) {
+    $sql = "SELECT nom_image FROM EMPRUNTS_images_objet WHERE id_objet = $id_objet";
+    $res = mysqli_query($bdd, $sql);
+    $images = array();
+    if ($res && mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $images[] = $row['nom_image'];
+        }
+    }
+    return $images;
+}
+
+function get_historique_emprunts_objet($bdd, $id_objet) {
+    $sql = "SELECT e.date_emprunt, e.date_retour, m.nom FROM EMPRUNTS_emprunt e JOIN EMPRUNTS_membres m ON e.id_membre = m.id_membre WHERE e.id_objet = $id_objet ORDER BY e.date_emprunt DESC";
+    $res = mysqli_query($bdd, $sql);
+    $hist = array();
+    if ($res && mysqli_num_rows($res) > 0) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $hist[] = $row;
+        }
+    }
+    return $hist;
 } 
