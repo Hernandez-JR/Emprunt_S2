@@ -25,6 +25,7 @@ if ($res_cat) {
     <meta charset="UTF-8">
     <title>Liste des objets</title>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css_perso/style_home.css">
 </head>
 <body>
     <nav class="navbar navbar-light bg-light mb-4">
@@ -33,42 +34,46 @@ if ($res_cat) {
         </div>
     </nav>
     <div class="container">
-        <h2 class="mb-4">Liste des objets empruntés</h2>
-
-        <form method="get" action="" class="row g-3 align-items-center mb-4">
-            <div class="col-auto">
-                <label for="categorie" class="col-form-label">Filtrer par catégorie :</label>
-            </div>
-            <div class="col-auto">
-                <select name="categorie" id="categorie" class="form-select">
-                    <option value="">Toutes</option>
-                    <?php
-                    for ($i = 0; $i < count($categories); $i++) {
-                        echo '<option value="' . $categories[$i]['id_categorie'] . '"';
-                        if ($id_categorie == $categories[$i]['id_categorie']) {
-                            echo ' selected';
+        <div class="table-container">
+            <h2 class="mb-4 text-center">Liste des objets empruntés</h2>
+            <form method="get" action="" class="row g-3 align-items-center mb-4 justify-content-center">
+                <div class="col-auto">
+                    <label for="categorie" class="col-form-label">Filtrer par catégorie :</label>
+                </div>
+                <div class="col-auto">
+                    <select name="categorie" id="categorie" class="form-select">
+                        <option value="">Toutes</option>
+                        <?php
+                        for ($i = 0; $i < count($categories); $i++) {
+                            echo '<option value="' . $categories[$i]['id_categorie'] . '"';
+                            if ($id_categorie == $categories[$i]['id_categorie']) {
+                                echo ' selected';
+                            }
+                            echo '>' . $categories[$i]['nom_categorie'] . '</option>';
                         }
-                        echo '>' . $categories[$i]['nom_categorie'] . '</option>';
-                    }
-                    ?>
-                </select>
+                        ?>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary">Filtrer</button>
+                </div>
+            </form>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped align-middle">
+                    <thead>
+                        <tr>
+                            <th>Nom de la personne</th>
+                            <th>Catégorie</th>
+                            <th>Objet</th>
+                            <th>Date d'emprunt</th>
+                            <th>Fin/Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php afficher_Tous_Emprunts($bdd, $id_categorie); ?>
+                    </tbody>
+                </table>
             </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary">Filtrer</button>
-            </div>
-        </form>
-
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped align-middle">
-                <thead class="table-light">
-                <?php
-                afficher_Tous_Emprunts($bdd, $id_categorie);
-                ?>
-                </thead>
-                <tbody>
-                
-                </tbody>
-            </table>
         </div>
     </div>
 </body>
