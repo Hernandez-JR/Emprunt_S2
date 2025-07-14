@@ -4,6 +4,16 @@ require_once '../../inc/functions.php';
 $bdd = connectDB();
 
 $membres = get_all_membres($bdd);
+
+
+$retour_message = '';
+if (isset($_GET['etat_retour'])) {
+    if ($_GET['etat_retour'] === 'ok') {
+        $retour_message = '<div class="alert alert-success">Retour effectué : OK</div>';
+    } elseif ($_GET['etat_retour'] === 'abime') {
+        $retour_message = '<div class="alert alert-warning">Retour effectué : Objet abîmé</div>';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -16,7 +26,17 @@ $membres = get_all_membres($bdd);
 </head>
 <?php include '../../inc/header.php'; ?>
 <body>
+
+<div class="container mt-3 mb-3">
+    <a href="liste_emprunts.php" class="btn btn-info">Voir la liste des emprunts</a>
+</div>
 <h2>Liste des membres et leurs emprunts par catégorie</h2>
+<?php
+
+if (!empty($retour_message)) {
+    echo $retour_message;
+}
+?>
 <?php if (count($membres) > 0) { for ($i = 0; $i < count($membres); $i++) { ?>
     <div class="membre-block">
         <h3><?php echo $membres[$i]['nom']; ?></h3>
@@ -28,7 +48,29 @@ $membres = get_all_membres($bdd);
                 if (count($emprunts) > 0) { ?>
                     <ul>
                     <?php for ($k = 0; $k < count($emprunts); $k++) { ?>
-                        <li>Objet : <?php echo $emprunts[$k]['nom_objet']; ?> | Date emprunt : <?php echo $emprunts[$k]['date_emprunt']; ?> | Date retour : <?php echo $emprunts[$k]['date_retour']; ?></li>
+                        <li>Objet : <?php echo $emprunts[$k]['nom_objet']; ?> | Date emprunt : <?php echo $emprunts[$k]['date_emprunt']; ?> | Date retour : <?php echo $emprunts[$k]['date_retour']; ?>
+                            <form method="post" action="../page_traitements/traitement_retour.php" style="display:inline; margin-left:10px;">
+                                <input type="hidden" name="id_membre" value="<?php echo $membres[$i]['id_membre']; ?>">
+                                <input type="hidden" name="nom_objet" value="<?php echo $emprunts[$k]['nom_objet']; ?>">
+                                <input type="hidden" name="date_emprunt" value="<?php echo $emprunts[$k]['date_emprunt']; ?>">
+                                <button type="submit" class="btn btn-sm btn-primary" name="retour">Retour</button>
+                            </form>
+                            <?php
+                            
+                            if (
+                                isset($_GET['etat_retour'], $_GET['id_membre'], $_GET['nom_objet'], $_GET['date_emprunt']) &&
+                                $_GET['id_membre'] == $membres[$i]['id_membre'] &&
+                                $_GET['nom_objet'] == $emprunts[$k]['nom_objet'] &&
+                                $_GET['date_emprunt'] == $emprunts[$k]['date_emprunt']
+                            ) {
+                                if ($_GET['etat_retour'] === 'ok') {
+                                    echo '<span class="badge bg-success ms-2">OK</span>';
+                                } elseif ($_GET['etat_retour'] === 'abime') {
+                                    echo '<span class="badge bg-warning text-dark ms-2">Abîmé</span>';
+                                }
+                            }
+                            ?>
+                        </li>
                     <?php } ?>
                     </ul>
                 <?php } else { ?>

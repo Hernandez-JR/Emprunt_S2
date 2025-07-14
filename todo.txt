@@ -56,3 +56,5 @@ dans la fiche membre, mettre les infos du membre, ainsi que les objets du membre
 - la date de l'emprunt devient disponible dans date emprunt debut + duree
 
 deployer sur le serveur 
+
+
