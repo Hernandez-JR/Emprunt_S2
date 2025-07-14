@@ -101,12 +101,39 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
             }
             $date_emprunt = $row['date_emprunt'] ? $row['date_emprunt'] : '-';
             $date_retour = $row['date_retour'] ? $row['date_retour'] : 'disponible';
+
+           
+            $statut = '';
+            if ($date_retour == 'disponible') {
+                $statut = 'disponible';
+            } else {
+                $aujourdhui = date('Y-m-d');
+                $diff = (strtotime($date_retour) - strtotime($aujourdhui)) / (60*60*24);
+                if ($diff > 0) {
+                    $statut = 'disponible dans ' . intval($diff) . ' jours';
+                } else {
+                    $statut = 'disponible';
+                }
+            }
+
             echo '<tr>';
             echo '<td style="white-space:nowrap;"><img src="' . $img_src . '" alt="image objet" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">' . $delete_btn . '</td>';
             echo '<td><a href="fiche_objet.php?id=' . $row['id_objet'] . '" style="color:#2563eb;text-decoration:underline;">' . $row['nom_objet'] . '</a></td>';
             echo '<td>' . $row['nom_categorie'] . '</td>';
             echo '<td>' . $date_emprunt . '</td>';
-            echo '<td>' . $date_retour . '</td>';
+            echo '<td>';
+            if ($statut == 'disponible') {
+                
+                echo '<form method="post" action="../page_traitements/traitement_emprunt.php" style="display:inline;">';
+                echo '<input type="hidden" name="id_objet" value="' . $id_objet . '">';
+                echo '<input type="hidden" name="date_emprunt" value="' . date('Y-m-d') . '">';
+                echo 'Rendre le : <input type="date" name="date_retour" required min="' . date('Y-m-d') . '">';
+                echo '<button type="submit" class="btn btn-success btn-sm ms-2">Emprunter</button>';
+                echo '</form>';
+            } else {
+                echo $statut;
+            }
+            echo '</td>';
             echo '</tr>';
         }
     } else {
@@ -205,4 +232,9 @@ function get_emprunts_by_membre_and_categorie($bdd, $id_membre, $id_categorie) {
         }
     }
     return $emprunts;
+} 
+
+function enregistrer_emprunt($bdd, $id_objet, $id_membre, $date_emprunt, $date_retour) {
+    $sql = "INSERT INTO EMPRUNTS_emprunt (id_objet, id_membre, date_emprunt, date_retour) VALUES ($id_objet, $id_membre, '$date_emprunt', '$date_retour')";
+    return mysqli_query($bdd, $sql);
 } 

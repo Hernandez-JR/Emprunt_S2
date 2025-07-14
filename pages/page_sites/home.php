@@ -135,12 +135,35 @@ if ($res) {
                                 <?php
                                 if (count($liste_objets) > 0) {
                                     foreach ($liste_objets as $row) {
+                                        $statut = '';
+                                        if ($row['date_retour'] == 'disponible') {
+                                            $statut = 'disponible';
+                                        } else {
+                                            $aujourdhui = date('Y-m-d');
+                                            $diff = (strtotime($row['date_retour']) - strtotime($aujourdhui)) / (60*60*24);
+                                            if ($diff > 0) {
+                                                $statut = 'disponible dans ' . intval($diff) . ' jours';
+                                            } else {
+                                                $statut = 'disponible';
+                                            }
+                                        }
                                         echo '<tr>';
                                         echo '<td style="white-space:nowrap;"><img src="' . $row['img_src'] . '" alt="image objet" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">' . $row['delete_btn'] . '</td>';
                                         echo '<td><a href="fiche_objet.php?id=' . $row['id_objet'] . '" style="color:#2563eb;text-decoration:underline;">' . $row['nom_objet'] . '</a></td>';
                                         echo '<td>' . $row['nom_categorie'] . '</td>';
                                         echo '<td>' . $row['date_emprunt'] . '</td>';
-                                        echo '<td>' . $row['date_retour'] . '</td>';
+                                        echo '<td>';
+                                        if ($statut == 'disponible') {
+                                            echo '<form method="post" action="../page_traitements/traitement_emprunt.php" style="display:inline;">';
+                                            echo '<input type="hidden" name="id_objet" value="' . $row['id_objet'] . '">';
+                                            echo '<input type="hidden" name="date_emprunt" value="' . date('Y-m-d') . '">';
+                                            echo 'Rendre le : <input type="date" name="date_retour" required min="' . date('Y-m-d') . '">';
+                                            echo '<button type="submit" class="btn btn-success btn-sm ms-2">Emprunter</button>';
+                                            echo '</form>';
+                                        } else {
+                                            echo $statut;
+                                        }
+                                        echo '</td>';
                                         echo '</tr>';
                                     }
                                 } else {

@@ -51,3 +51,8 @@ case à cocher disponible
 dans la fiche membre, mettre les infos du membre, ainsi que les objets du membre regroupés par catégorie
 
 
+- ajouter bouton emprunter a droite du tableau genere par la fonctiom
+- Ajouter date emprunt et faire entrer dans la base
+- la date de l'emprunt devient disponible dans date emprunt debut + duree
+
+deployer sur le serveur 
