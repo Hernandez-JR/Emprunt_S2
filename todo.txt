@@ -17,6 +17,17 @@ inserer des donnes exemplaires:
 
 Creation des pages demandees:
 - Login.php et fonction identification via email et mot de passe
--Inscription.php pour s'inscire enail, nom. ville
+-Inscription.php pour s'inscrire email, nom. ville
 - home.php pour afficher les differentes categories
+
+
+
+- Ajuster les redirections
+- connexion locale de la base de donnes
+- test de la fonctionnalite
+
+- ajout du boostrap et des css perso dans les fichiers login et Inscription
+
+
+
 

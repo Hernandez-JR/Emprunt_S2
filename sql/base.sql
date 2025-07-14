@@ -120,3 +120,6 @@ INSERT INTO EMPRUNTS_emprunt (id_objet, id_membre, date_emprunt, date_retour) VA
 (36, 4, '2024-05-08', '2024-05-18'),
 (39, 2, '2024-05-09', '2024-05-19'),
 (40, 3, '2024-05-10', '2024-05-20'); 
+
+
+SELECT id

@@ -11,13 +11,17 @@
     
     ) {
         $nom = $_POST['nom'];
-        $date_naissance-= $_POST['date_de_naissance'];
+        $date_fr = $_POST['date_de_naissance'];
+        $date_de_naissance = date('Y-m-d', strtotime(str_replace('/', '-', $date_fr)));
         $genre = $_POST['genre']; 
         $email = $_POST['email'];
         $ville = $_POST['ville'];   
         $motdepasse = $_POST['mdp'];
 
-        if(inscrire_membres($bdd, $nom, $date_naissance ,$genre, $email, $ville, $motdepasse)) {
+        if(inscrire_membres($bdd, $nom, $date_de_naissance ,$genre, $email, $ville, $motdepasse)) {
+            session_start();
+            $_SESSION['nom'] = $nom;
+            $_SESSION['email'] = $email;
             header('Location: ../page_sites/home.php');
         } else {
             header('Location: ../page_sites/inscription.php?erreur=1');

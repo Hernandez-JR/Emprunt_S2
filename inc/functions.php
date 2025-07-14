@@ -30,3 +30,5 @@ function inscrire_membres($bdd, $nom, $dtn ,$genre, $email, $ville, $mdp) {
 
     return mysqli_query($bdd, $requete);
 }
+
+function get_Objets_Empruntes()

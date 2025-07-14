@@ -1,0 +1,22 @@
+body {
+  background: #c4b397; /* beige très clair */
+}
+
+.card {
+  background: #fffbe9; /* blanc/beige doux */
+}
+
+.btn-primary {
+  background-color: #e6cfa7;
+  border-color: #e6cfa7;
+  color: #5a4632;
+}
+
+.btn-primary:hover {
+  background-color: #d9b98c;
+  border-color: #d9b98c;
+  color: #5a4632;
+}
+.container.mt-5 {
+    margin-top: 60px; 
+}

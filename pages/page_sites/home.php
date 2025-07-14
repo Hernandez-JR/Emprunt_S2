@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Connexion reussi</h1>
+    <nav></nav>
+    <h2>Liste des objets </h2>
+
+    <table border=1</table>
 </body>
 </html>
