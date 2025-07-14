@@ -9,7 +9,10 @@ $bdd = connectDB();
     <meta charset="UTF-8">
     <title>Liste des emprunts</title>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../assets/css_perso/style_fiche_membres.css">
+    <link rel="stylesheet" href="../../assets/css_perso/style_home.css">
 </head>
+<?php include '../../inc/header.php'; ?>
 <body>
     <div class="container mt-5">
         <h2 class="mb-4">Liste des emprunts</h2>
@@ -49,7 +52,8 @@ $bdd = connectDB();
                 ?>
             </tbody>
         </table>
-        <a href="home.php" class="btn btn-secondary">Retour à l'accueil</a>
+        <a href="fiche_membres.php" class="btn btn-secondary mt-3">Retour à la fiche membres</a>
     </div>
+<?php include '../../inc/footer.php'; ?>
 </body>
 </html>
