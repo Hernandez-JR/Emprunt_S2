@@ -1,4 +1,4 @@
-use db_s2_ETU004027;
+
 
 CREATE TABLE EMPRUNTS_membres (
     id_membre INT AUTO_INCREMENT PRIMARY KEY,
@@ -124,4 +124,3 @@ INSERT INTO EMPRUNTS_emprunt (id_objet, id_membre, date_emprunt, date_retour) VA
 (40, 3, '2024-05-10', '2024-05-20'); 
 
 
-SELECT id
