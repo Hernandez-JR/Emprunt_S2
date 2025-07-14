@@ -79,7 +79,7 @@ if ($res_cat) {
         <label for="categorie_objet" class="form-label">Categorie</label>
         <select name="categorie_objet" id="categorie_objet" class="form-select" required>
             <?php foreach ($categories as $cat) { ?>
-                <option value="<?php echo $cat['id_categorie']; ?>"><?php $cat['nom_categorie']; ?></option>
+                <option value="<?php echo $cat['id_categorie']; ?>"><?php echo $cat['nom_categorie']; ?></option>
             <?php } ?>
         </select>
     </div>

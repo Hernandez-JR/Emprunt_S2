@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id_membre = null;
     }
 
-    // Insertion de l'objet
+  
     $id_objet = ajouter_objet($bdd, $nom_objet, $id_categorie, $id_membre);
     if ($id_objet) {
     
