@@ -96,3 +96,17 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
         echo '<tr><td colspan="4">Aucun objet trouvé.</td></tr>';
     }
 } 
+
+function ajouter_objet($bdd, $nom_objet, $id_categorie, $id_membre) {
+    $sql = "INSERT INTO EMPRUNTS_objet (nom_objet, id_categorie, id_membre) VALUES ('$nom_objet', $id_categorie, $id_membre)";
+    if (mysqli_query($bdd, $sql)) {
+        return mysqli_insert_id($bdd);
+    } else {
+        return false;
+    }
+}
+
+function ajouter_image_objet($bdd, $id_objet, $nom_image) {
+    $sql = "INSERT INTO EMPRUNTS_images_objet (id_objet, nom_image) VALUES ($id_objet, '$nom_image')";
+    return mysqli_query($bdd, $sql);
+} 

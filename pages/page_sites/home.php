@@ -86,7 +86,6 @@ if ($res_cat) {
     <div class="mb-3">
         <label for="images_objet" class="form-label">Images de l'objet</label>
         <input type="file" class="form-control" id="images_objet" name="images_objet[]" accept="image/*" multiple required>
-        <small class="form-text text-muted">Vous pouvez sélectionner plusieurs images.</small>
     </div>
     <div class="text-center">
         <button type="submit" class="btn btn-primary px-4">Ajouter l'objet</button>
