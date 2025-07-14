@@ -89,13 +89,20 @@ function afficher_Tous_Emprunts($bdd, $id_categorie = null) {
             if ($img_res && mysqli_num_rows($img_res) > 0) {
                 $img_row = mysqli_fetch_assoc($img_res);
                 $img_src = '../../' . $img_row['nom_image'];
+                $img_name = $img_row['nom_image'];
+                $delete_btn = '<form method="post" action="../page_traitements/traitement_recherche.php" style="display:inline;">
+                    <input type="hidden" name="id_objet" value="' . $id_objet . '">
+                    <input type="hidden" name="img_name" value="' . $img_name . '">
+                    <button type="submit" name="supprimer_image" class="btn btn-sm btn-danger ms-2" onclick="return confirm(\'Supprimer cette image ?\')">🗑️</button>
+                </form>';
             } else {
                 $img_src = '../../assets/images/img_objet/tournevis.webp';
+                $delete_btn = '';
             }
             $date_emprunt = $row['date_emprunt'] ? $row['date_emprunt'] : '-';
             $date_retour = $row['date_retour'] ? $row['date_retour'] : 'disponible';
             echo '<tr>';
-            echo '<td><img src="' . $img_src . '" alt="image objet" style="width:60px;height:60px;object-fit:cover;border-radius:8px;"></td>';
+            echo '<td style="white-space:nowrap;"><img src="' . $img_src . '" alt="image objet" style="width:60px;height:60px;object-fit:cover;border-radius:8px;">' . $delete_btn . '</td>';
             echo '<td><a href="fiche_objet.php?id=' . $row['id_objet'] . '" style="color:#2563eb;text-decoration:underline;">' . $row['nom_objet'] . '</a></td>';
             echo '<td>' . $row['nom_categorie'] . '</td>';
             echo '<td>' . $date_emprunt . '</td>';
@@ -153,4 +160,49 @@ function get_historique_emprunts_objet($bdd, $id_objet) {
         }
     }
     return $hist;
+} 
+
+function get_all_membres($bdd) {
+    $sql = "SELECT id_membre, nom FROM EMPRUNTS_membres ORDER BY nom";
+    $res = mysqli_query($bdd, $sql);
+    $membres = array();
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $membres[] = $row;
+        }
+    }
+    return $membres;
+}
+
+function get_categories_empruntees_by_membre($bdd, $id_membre) {
+    $sql = "SELECT DISTINCT c.id_categorie, c.nom_categorie
+            FROM EMPRUNTS_emprunt e
+            JOIN EMPRUNTS_objet o ON e.id_objet = o.id_objet
+            JOIN EMPRUNTS_categorie_objet c ON o.id_categorie = c.id_categorie
+            WHERE e.id_membre = $id_membre
+            ORDER BY c.nom_categorie";
+    $res = mysqli_query($bdd, $sql);
+    $categories = array();
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $categories[] = $row;
+        }
+    }
+    return $categories;
+}
+
+function get_emprunts_by_membre_and_categorie($bdd, $id_membre, $id_categorie) {
+    $sql = "SELECT o.nom_objet, e.date_emprunt, e.date_retour
+            FROM EMPRUNTS_emprunt e
+            JOIN EMPRUNTS_objet o ON e.id_objet = o.id_objet
+            WHERE e.id_membre = $id_membre AND o.id_categorie = $id_categorie
+            ORDER BY e.date_emprunt DESC";
+    $res = mysqli_query($bdd, $sql);
+    $emprunts = array();
+    if ($res) {
+        while ($row = mysqli_fetch_assoc($res)) {
+            $emprunts[] = $row;
+        }
+    }
+    return $emprunts;
 } 

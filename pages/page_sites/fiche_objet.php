@@ -20,6 +20,7 @@ if (isset($_GET['id'])) {
     <title>Fiche objet</title>
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css_perso/style_fiche.css">
+
 </head>
 <body>
 <?php include '../../inc/header.php'; ?>
